@@ -1,117 +1,72 @@
-# 📈 Stock Market Volatility and Sector Dynamics Analysis
+# 📊 Stock Market Volatility and Sector Dynamics
 
-This project analyzes the **volatility patterns** of major stock market sectors and explores their **interrelationships** over time. Leveraging Python, financial APIs, and Power BI, we uncover insights into market behavior through statistical metrics, correlation heatmaps, and interactive dashboards.
-
----
-
-## 📌 Project Overview
-
-* **Goal**: Analyze volatility and sectoral dynamics of S\&P 500 sectors
-* **Timeframe**: January 2022 to February 2023 (approx. 250 trading days)
-* **Tools Used**: Python (yFinance, Pandas, NumPy, Matplotlib), Power BI, Financial APIs
-* **Key Metrics**: Daily % Change, Standard Deviation (Volatility), Sector Correlations
+This project explores the **volatility trends and sector-wise dynamics** in the U.S. stock market using historical ETF data. We focus on understanding how different sectors perform over time, their trading volumes, and distribution of listed tickers using Python and Power BI.
 
 ---
 
-## 🗃️ Data Collection
+## 📌 Key Objectives
 
-* Collected **daily closing prices** for 11 S\&P 500 sector ETFs via **yFinance**
-* Calculated **daily percent change** and derived **volatility** as the standard deviation
-
-```python
-import yfinance as yf
-import pandas as pd
-
-tickers = ['XLF', 'XLK', 'XLY', 'XLP', 'XLE', 'XLV', 'XLI', 'XLB', 'XLRE', 'XLU', 'XLC']
-data = yf.download(tickers, start='2022-01-01', end='2023-02-28')['Adj Close']
-returns = data.pct_change().dropna()
-```
-
-📎 *Attach Line Chart of ETF Adjusted Close from Page 2 of report*
+* Analyze historical volatility trends across sectors
+* Visualize volume dynamics using time series plots
+* Examine distribution of listed companies sector-wise
+* Explore interactive visualizations with Power BI
 
 ---
 
-## 📊 Volatility Calculation
+## 🗃️ Dataset Overview
 
-* Computed **sector-wise volatility** using the standard deviation of daily returns
-* Visualized top 3 most volatile sectors
+The dataset contains historical stock prices and sector mappings of ETFs. We engineered features such as:
 
-📎 *Attach Sector-wise Volatility Bar Chart from Page 3 of report*
-
-```python
-volatility = returns.std()
-volatility.sort_values(ascending=False).plot(kind='bar')
-```
+* **Rolling volatility** of adjusted close prices
+* **Average trading volume** by sector
+* **Year-wise ticker count**
 
 ---
 
-## 🔄 Rolling Volatility
+## 📈 Visual Insights
 
-* Used a **20-day rolling window** to measure how volatility evolved over time
-* This helps reveal periods of market stress or stability
+### 🔹 Sector-wise Volume Over Time
 
-📎 *Attach Rolling Volatility Line Graph from Page 4 of report*
+![Volume Over Time](/charts/sector_volume_over_time.png)
 
-```python
-rolling_volatility = returns.rolling(window=20).std()
-rolling_volatility.plot(figsize=(12,6))
-```
+### 🔹 Sector Ticker Distribution (2024)
 
----
+![Ticker Count 2024](/charts/sector_ticker_counts_2024.png)
 
-## 🔗 Sector Correlation Analysis
+### 🔹 Year-wise Ticker Count by Sector
 
-* Created a **correlation matrix** of sector returns
-* Identified strongly correlated sectors (e.g., XLF & XLK)
+![Ticker Growth](/charts/ticker_count_by_year_sector.png)
 
-📎 *Attach Correlation Heatmap from Page 5 of report*
+### 🔹 Distribution of Tickers Across Sectors
 
-```python
-correlation_matrix = returns.corr()
-sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm')
-```
+![Distribution by Sector](/charts/ticker_distribution_by_sector.png)
 
 ---
 
-## 📈 Power BI Dashboard
+## 🖊️ Exploratory Sketch
 
-* Designed an interactive dashboard to explore:
-
-  * Sector-wise price trends
-  * Volatility comparisons
-  * Year-over-year returns
-
-📎 *Attach screenshots of Power BI dashboard visuals from Page 6–7*
+Early sketch for understanding chart suitability:
+![Sketch: Bar vs Pie](/charts/bar_vs_pie_sketch.jpg)
 
 ---
 
-## 🧠 Key Insights
+## 🛠️ Tools & Technologies
 
-* **Technology (XLK)** and **Energy (XLE)** were the most volatile sectors
-* Defensive sectors like **Utilities (XLU)** had low volatility
-* Strong correlations suggest linked behavior (e.g., growth sectors)
-* Rolling volatility shows market fluctuations during inflation/news cycles
-
----
-
-## 🧰 Tools & Libraries
-
-* **Python**: yFinance, Pandas, NumPy, Seaborn, Matplotlib
-* **BI**: Power BI for interactive sector dashboards
-* **Finance**: Adjusted Close, Daily Returns, Rolling Std Dev
+* **Python (Pandas, Matplotlib, Seaborn)** for EDA
+* **Power BI** for interactive dashboards
+* **Jupyter Notebooks** for analysis scripting
 
 ---
 
----
+## 💡 Insights & Observations
 
-## 🔮 Future Work
-
-* Incorporate **macro-economic indicators** like inflation or interest rate data
-* Apply **forecasting models** to predict future volatility
-* Explore **clustering** of sectors based on volatility profiles
+* Financial Services and Healthcare dominate in number of tickers.
+* Technology and Real Estate have grown rapidly post-2000.
+* Communication Services showed volatile spikes post-2008.
+* Bar charts are superior to pie charts in reflecting sector dynamics.
 
 ---
 
 ## 🧠 Summary
 
-This project delivers a multi-dimensional view of sector dynamics and volatility within the stock market. Through Python-driven analysis and visual storytelling via Power BI, it highlights the value of data-driven market monitoring for investors and analysts alike.
+This analysis reveals insightful sectoral patterns in trading activity and growth. Visualizing the time-based movement of sector volumes alongside the expansion in listings allows investors and analysts to better understand macro trends in the market.
